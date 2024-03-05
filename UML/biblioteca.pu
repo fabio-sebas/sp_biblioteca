@@ -1,0 +1,47 @@
+@startuml
+title Diagrama de Relaciones - Biblioteca Digital
+
+' Declaración de paquetes
+package "Biblioteca Digital" {
+    package "Usuarios" {
+        [Usuario] as usuario
+        [Libro Reservado] as libro_reservado
+        [Reseña] as reseña
+    }
+
+    package "Libros" {
+        [Libro] as libro
+        [Autor] as autor
+    }
+
+    package "Categorías" {
+        [Categoría] as categoria
+    }
+
+    ' Relaciones entre usuarios y libros
+    usuario -- libro_reservado : tiene (1 a muchos)
+    usuario -- reseña : deja (1 a muchos)
+
+    ' Relaciones entre libros y otras entidades
+    libro -- autor : pertenece a (1 a muchos)
+    libro -- reseña : tiene (1 a muchos)
+    
+    ' Relación entre libros y categorías
+    libro -- categoria : clasificado en (1 a muchos)
+}
+
+' Comentarios breves para explicar las relaciones
+note right of usuario
+    Usuarios: lista de libros reservados y reseñas.
+end note
+
+note right of libro
+    Libros: pertenecen a autores, tienen reseñas.
+end note
+
+note right of categoria
+    Categorías: contienen varios libros.
+end note
+
+@enduml
+
